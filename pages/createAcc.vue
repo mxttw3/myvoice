@@ -6,22 +6,27 @@
           <img src="../img/logo.png" alt="Logo" class="mx-auto max-w-xs" />
         </div>
         <form @submit.prevent="createAccount">
+          
           <div class="mb-4">
             <label for="firstName" class="block mb-2">First Name:</label>
             <input v-model="firstName" type="text" id="firstName" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" />
           </div>
+
           <div class="mb-4">
             <label for="lastName" class="block mb-2">Last Name:</label>
             <input v-model="lastName" type="text" id="lastName" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" />
           </div>
+
           <div class="mb-4">
             <label for="email" class="block mb-2">Email:</label>
             <input v-model="email" type="email" id="email" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" />
           </div>
+
           <div class="mb-4">
             <label for="password" class="block mb-2">Password:</label>
             <input v-model="password" type="password" id="password" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" />
           </div>
+
           <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
             Create Account
           </button>
