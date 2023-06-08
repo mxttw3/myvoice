@@ -11,8 +11,7 @@
         <div class="flex justify-center mt-4">
           <button
             @click="loginWithGoogle"
-            class="w-full border border-red-500 hover:bg-red-500 hover:text-white text-red-500 font-bold py-2 px-4 rounded flex items-center justify-center"
-          >
+            class="w-full border border-red-700 hover:bg-red-700 hover:text-white text-red-500 font-bold py-2 px-4 rounded flex items-center justify-center">
             <span class="flex items-center">
               <img
                 src="../img/Google__G__Logo.svg.png"
