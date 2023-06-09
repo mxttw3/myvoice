@@ -8,12 +8,12 @@
         <nav class="flex items-center flex-grow justify-center">
           <ul class="flex space-x-4">
             <li>
-              <a href="#" class="text-black hover:text-gray-500 font font-light"
+              <a href="/home" class="text-black hover:text-gray-500 font font-light"
                 >Home</a
               >
             </li>
             <li>
-              <a href="#" class="text-black hover:text-gray-500 font font-light"
+              <a href="/buyTokens" class="text-black hover:text-gray-500 font font-light"
                 >Buy Tokens</a
               >
             </li>
