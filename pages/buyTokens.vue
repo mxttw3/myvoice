@@ -27,19 +27,7 @@
   
         <main class="p-8">
           <!-- Contenido del home aquí -->
-          <h2 class="text-2xl font font-light mb-4">
-            Wellcome, {{ usuario.nombre }}
-          </h2>
-          <div class="miniBox">
-            <div class="tokens-container">
-              <p class="font font-medium tokenSize">Your tokens:</p>
-              <p class="font font-bold size">{{ usuario.tokens }}</p>
-              <div class="buy-button-container">
-                <button class="buy-button">BUY MORE</button>
-              </div>
-            </div>
-          </div>
-          <!-- Resto del contenido del home -->
+
         </main>
       </div>
     </div>
