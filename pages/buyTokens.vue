@@ -8,14 +8,10 @@
           <nav class="flex items-center flex-grow justify-center">
             <ul class="flex space-x-4">
               <li>
-                <a href="/home" class="text-black hover:text-gray-500 font font-light"
-                  >Home</a
-                >
+                <a href="/home" class="text-black hover:text-gray-500 font font-light">Home</a>
               </li>
               <li>
-                <a href="/buyTokens" class="text-black hover:text-gray-500 font font-light"
-                  >Buy Tokens</a
-                >
+                <a href="/buyTokens" class="text-black hover:text-gray-500 font font-light">Buy Tokens</a>
               </li>
             </ul>
           </nav>
@@ -26,9 +22,34 @@
         <hr class="flex-grow border-gray-300" />
   
         <main class="p-8">
-          <!-- Contenido del home aquí -->
+  <div class="flex justify-center space-x-8">
+    <!-- Carta de suscripción básica -->
+    <div class="card">
+      <h2 class="card-title sizeTittle font">Basic</h2>
+      <p class="card-description">Acceso limitado a funciones básicas del sitio.</p>
+      <p class="card-price">$9.99/month</p>
+      <a href="/subscribe/basic" class="card-button">Buy</a>
+    </div>
 
-        </main>
+    <!-- Carta de suscripción normal -->
+    <div class="card">
+      <h2 class="card-title font sizeTittle font">Starter</h2>
+      <p class="card-description">Acceso completo a todas las funciones del sitio.</p>
+      <p class="card-price">$19.99/month</p>
+      <a href="/subscribe/normal" class="card-button">Buy</a>
+    </div>
+
+    <!-- Carta de suscripción Pro -->
+    <div class="card">
+      <h2 class="card-title sizeTittle font">Creator</h2>
+      <p class="card-description">Acceso premium a funciones avanzadas del sitio.</p>
+      <p class="card-price">$29.99/month</p>
+      <a href="/subscribe/pro" class="card-button">Buy</a>
+    </div>
+  </div>
+</main>
+
+
       </div>
     </div>
   </template>
@@ -56,9 +77,7 @@
   .font {
     font-family: "Geologica", serif;
   }
-  .tokenSize {
-    font-size: 30px;
-  }
+
   .size {
     font-size: 150px;
   }
@@ -81,53 +100,61 @@
   .logo-container {
     filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
   }
-  
-  .miniBox {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-  }
-  
-  .tokens-container {
-    width: 50%;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .tokenSize {
-    font-size: 30px;
-    text-align: center;
-  }
-  
-  .size {
-    font-size: 150px;
-    text-align: center;
-  }
-  
-  .buy-button-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .buy-button {
-    padding: 0.5em 2em;
-    background-color: #4caf50;
-    color: white;
-    font-family: "Geologica", serif;
-    font-weight: 500;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .buy-button:hover {
-    background-color: #45a049;
-  }
+  .card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  width: 320px;
+  height: 345px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  color: #333333;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  margin-bottom: 30px;
+}
+
+.card-description {
+  color: #666666;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumenta el margen inferior para separar del precio */
+}
+
+.card-price {
+  color: #333333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-button {
+  background-color: #4caf50;
+  border-radius: 6px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 18px;
+  padding: 9px 35px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+
+}
+
+.card-button:hover {
+  background-color: #45a049;
+}
+
+.sizeTittle{
+    font-size: 40px;
+}
   </style>
   
