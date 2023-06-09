@@ -8,10 +8,14 @@
         <nav class="flex items-center flex-grow justify-center">
           <ul class="flex space-x-4">
             <li>
-              <a href="#" class="text-black hover:text-gray-500 font font-light	">Home</a>
+              <a href="#" class="text-black hover:text-gray-500 font font-light"
+                >Home</a
+              >
             </li>
             <li>
-              <a href="#" class="text-black hover:text-gray-500 font font-light	">Buy Tokens</a>
+              <a href="#" class="text-black hover:text-gray-500 font font-light"
+                >Buy Tokens</a
+              >
             </li>
           </ul>
         </nav>
@@ -26,8 +30,15 @@
         <h2 class="text-2xl font font-light mb-4">
           Wellcome, {{ usuario.nombre }}
         </h2>
-        <p class="font font-medium tokenSize">Your tokens:</p>
-        <p class="font font-bold size"> {{ usuario.tokens }}</p>
+        <div class="miniBox">
+          <div class="tokens-container">
+            <p class="font font-medium tokenSize">Your tokens:</p>
+            <p class="font font-bold size">{{ usuario.tokens }}</p>
+            <div class="buy-button-container">
+              <button class="buy-button">BUY MORE</button>
+            </div>
+          </div>
+        </div>
         <!-- Resto del contenido del home -->
       </main>
     </div>
@@ -37,10 +48,11 @@
 <script>
 export default {
   data() {
+    let tokens = 100000;
     return {
       usuario: {
         nombre: "Matthew Angulo",
-        tokens: 1000,
+        tokens: tokens,
       },
     };
   },
@@ -48,19 +60,18 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;500;700&display=swap");
 body {
   background-color: #d5fefd;
   background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 60%);
 }
-
-.font{
-  font-family: 'Geologica', serif;
+.font {
+  font-family: "Geologica", serif;
 }
-.tokenSize{
+.tokenSize {
   font-size: 30px;
 }
-.size{
+.size {
   font-size: 150px;
 }
 nav {
@@ -81,5 +92,53 @@ nav {
 
 .logo-container {
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.miniBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.tokens-container {
+  width: 50%;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.tokenSize {
+  font-size: 30px;
+  text-align: center;
+}
+
+.size {
+  font-size: 150px;
+  text-align: center;
+}
+
+.buy-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.buy-button {
+  padding: 0.5em 2em;
+  background-color: #4caf50;
+  color: white;
+  font-family: "Geologica", serif;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buy-button:hover {
+  background-color: #45a049;
 }
 </style>
