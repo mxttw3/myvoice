@@ -3,19 +3,23 @@
     <div class="box">
       <header class="py-4 px-8 flex">
         <div class="flex items-center">
-          <img src="../img/logo.png" alt="Logo" class="logo-container w-36" />
+          <a href="/home">
+            <img src="../img/logo.png" alt="Logo" class="logo-container w-36" />
+          </a>
         </div>
         <nav class="flex items-center flex-grow justify-center">
           <ul class="flex space-x-4">
             <li>
-              <a href="/home" class="text-black hover:text-gray-500 font font-light"
-                >Home</a
-              >
+              <a
+                href="/home"
+                class="text-black hover:text-gray-500 font font-light"
+                >Home</a>
             </li>
             <li>
-              <a href="/buyTokens" class="text-black hover:text-gray-500 font font-light"
-                >Buy Tokens</a
-              >
+              <a
+                href="/buyTokens"
+                class="text-black hover:text-gray-500 font font-light"
+                >Buy Tokens</a>
             </li>
           </ul>
         </nav>
@@ -32,10 +36,15 @@
         </h2>
         <div class="miniBox">
           <div class="tokens-container">
-            <p class="font font-medium tokenSize">Your tokens:</p>
-            <p class="font font-bold size">{{ usuario.tokens }}</p>
+            <p class="font font-medium tokenSize blackColor">Your tokens:</p>
+            <p class="font font-bold size blackColor">{{ usuario.tokens }}</p>
             <div class="buy-button-container">
-              <button class="buy-button">BUY MORE</button>
+              <button
+                class="buy-button"
+                onclick="window.location.href = '/buyTokens'"
+              >
+                BUY MORE
+              </button>
             </div>
           </div>
         </div>
@@ -58,13 +67,8 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;500;700&display=swap");
-body {
-  background-color: #d5fefd;
-  background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 60%);
-}
 .font {
   font-family: "Geologica", serif;
 }
@@ -140,5 +144,9 @@ nav {
 
 .buy-button:hover {
   background-color: #45a049;
+}
+
+.blackColor {
+  color: #252525;
 }
 </style>
