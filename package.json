@@ -9,8 +9,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "@nuxtjs/firebase": "^8.2.2",
+    "@stripe/stripe-js": "^1.54.0",
+    "axios": "^0.21.4",
     "core-js": "^3.25.3",
+    "firebase": "^9.22.2",
+    "firebaseui": "^6.0.2",
     "nuxt": "^2.16.3",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",

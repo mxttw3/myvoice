@@ -1,9 +1,7 @@
 <template>
   <div class="flex justify-center items-center min-h-screen">
     <div class="w-full max-w-md">
-      <div
-        class="bg-white rounded-lg shadow-xl shadow-md hover:shadow-lg p-6 mx-4"
-      >
+      <div class="bg-white rounded-lg shadow-xl shadow-md hover:shadow-lg p-6 mx-4">
         <div class="logo-container mb-8">
           <img src="../img/logo.png" alt="Logo" class="mx-auto max-w-xs" />
         </div>
@@ -11,7 +9,8 @@
         <div class="flex justify-center mt-4">
           <button
             @click="loginWithGoogle"
-            class="w-full border border-red-700 hover:bg-red-700 hover:text-white text-red-500 font-bold py-2 px-4 rounded flex items-center justify-center">
+            class="w-full border border-red-700 hover:bg-red-700 hover:text-white text-red-500 font-bold py-2 px-4 rounded flex items-center justify-center"
+          >
             <span class="flex items-center">
               <img
                 src="../img/Google__G__Logo.svg.png"
@@ -68,19 +67,25 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
-    };
+      email: '',
+      password: ''
+    }
   },
   methods: {
-    login() {
-      // Lógica para el inicio de sesión con email y contraseña
+    async loginWithGoogle() {
+      let provider = new this.$fireModule.auth.GoogleAuthProvider()
+      await this.$fire.auth.signInWithPopup(provider)
     },
-    loginWithGoogle() {
-      // Lógica para el inicio de sesión con Google
-    },
-  },
-};
+    async login() {
+      try {
+        await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
+        await this.$router.push('/payment')
+      } catch (error) {
+        console.error('Error de inicio de sesión:', error)
+      }
+    }
+  }
+}
 </script>
 
 <style>

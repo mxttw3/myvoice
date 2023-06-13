@@ -9,7 +9,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -35,8 +35,32 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/firebase'
   ],
 
+  firebase: {
+    config: {
+      apiKey: "AIzaSyBdsjs0ByFEQW3nX60I-aiSONEGH9fwswY",
+      authDomain: "paymentmethod-3396c.firebaseapp.com",
+      databaseURL: "https://paymentmethod-3396c-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "paymentmethod-3396c",
+      storageBucket: "paymentmethod-3396c.appspot.com",
+      messagingSenderId: "671357659644",
+      appId: "1:671357659644:web:0374fe812e2a426ec76a79",
+      measurementId: "G-C40BL9VZXP"
+    },
+    services: {
+      auth: true,
+    },
+  },
+  router: {
+    routes: [
+      {
+        path: '/payment',
+        component: '@/pages/payment.vue'
+      }
+    ]
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

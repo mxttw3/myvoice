@@ -6,7 +6,7 @@
           <img src="../img/logo.png" alt="Logo" class="mx-auto max-w-xs" />
         </div>
         <form @submit.prevent="createAccount">
-          
+
           <div class="mb-4">
             <label for="firstName" class="block mb-2">First Name:</label>
             <input v-model="firstName" type="text" id="firstName" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" />
@@ -33,7 +33,7 @@
         </form>
         <div class="flex justify-between mt-4">
           <a href="#" class="text-blue-500">Forgot password?</a>
-          <a href="./" class="text-blue-500">Sign In</a>
+          <a href="../" class="text-blue-500">Sign In</a>
         </div>
       </div>
     </div>
@@ -41,6 +41,26 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async createAccount() {
+      try {
+        await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
+        this.$router.push('/payment')
+      } catch (error) {
+        console.error('Error de registro:', error)
+      }
+    }
+  }
+}
 </script>
 
 <style>
@@ -58,9 +78,7 @@
 }
 
 input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="password"] {
+input[type="email"]{
   font-family: "Your Creative Font", sans-serif;
 }
 
