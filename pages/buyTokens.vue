@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <div class="box">
+    <div class="box" :class="{ 'popup-overlay': buyClicked }">
       <header class="py-4 px-8 flex">
         <div class="flex items-center">
           <a href="/home">
@@ -45,7 +45,9 @@
                   v-model="cantidadTokens"
                   class="input-tokens font font-thin"
                   min="200"
+                  value="200"
                 />
+
                 <p class="precio font">{{ calcularPrecio() }}€</p>
                 <button @click="calcularCosto" class="card-button font">
                   Buy
@@ -56,6 +58,23 @@
         </div>
       </main>
     </div>
+
+    <div v-if="showPopup" class="popup">
+  <div @click="showPopup = false"></div>
+  <div class="popup-content">
+    <button class="close-button" @click="closePopup">&#10005;</button> <!-- Botón de cerrar con el icono X -->
+    <h2 class="popup-title">Payment Methods</h2>
+    <div class="payment-methods">
+      <button class="payment-method" @click="selectPayment('PayPal')">
+        PayPal
+      </button>
+      <button class="payment-method" @click="selectPayment('Credit Card')">
+        Credit Card
+      </button>
+    </div>
+  </div>
+</div>
+
   </div>
 </template>
 
@@ -67,20 +86,39 @@ export default {
         nombre: "Matthew Angulo",
         tokens: 100000,
       },
-      cantidadTokens: 0,
+      cantidadTokens: 200,
+      showPopup: false,
+      selectedPayment: "",
+      buyClicked: false,
     };
   },
   methods: {
     calcularCosto() {
       const tokensComprados = parseInt(this.cantidadTokens);
       const costo = tokensComprados / 10;
-      alert(`El costo de la compra es de ${costo.toFixed(2)}€`);
+      if (tokensComprados >= 200) {
+        this.showPopup = true;
+        this.buyClicked = true;
+      } else {
+        alert("La cantidad mínima de tokens a comprar es de 200");
+      }
     },
     calcularPrecio() {
       const tokensComprados = parseInt(this.cantidadTokens);
       const costo = tokensComprados / 10;
       return `${costo.toFixed(2)}`;
     },
+
+    selectPayment(paymentMethod) {
+      this.selectedPayment = paymentMethod;
+      this.showPopup = false; // Cerrar el popup después de seleccionar un método de pago
+      // Aquí puedes realizar acciones adicionales según el método de pago seleccionado
+    },
+
+    closePopup() {
+    this.showPopup = false;
+    this.buyClicked = false;
+    }
   },
 };
 </script>
@@ -179,4 +217,65 @@ nav {
   font-size: 18px;
   margin-top: 8px;
 }
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 20px;
+  z-index: 999;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+.popup-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.payment-method {
+  background-color: #4caf50;
+  border-radius: 6px;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 18px;
+  padding: 9px 35px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  margin: 0 8px;
+}
+
+.payment-method:hover {
+  background-color: #45a049;
+}
+
+.popup-overlay {
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 21px;
+  color: #999999;
+  cursor: pointer;
+}
+
 </style>
