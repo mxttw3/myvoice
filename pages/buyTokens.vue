@@ -60,20 +60,21 @@
     </div>
 
     <div v-if="showPopup" class="popup">
-  <div @click="showPopup = false"></div>
-  <div class="popup-content">
-    <button class="close-button" @click="closePopup">&#10005;</button> <!-- Botón de cerrar con el icono X -->
-    <h2 class="popup-title">Payment Methods</h2>
-    <div class="payment-methods">
-      <button class="payment-method" @click="selectPayment('PayPal')">
-        PayPal
-      </button>
-      <button class="payment-method" @click="selectPayment('Credit Card')">
-        Credit Card
-      </button>
+      <div class="popup-content">
+        <button class="close-button" @click="closePopup">&#10005;</button> <!-- Botón de cerrar con el icono X -->
+        <h2 class="popup-title font-bold">Choose Payment</h2>
+        <p class="popup-subtitle">Choose how you want to pay</p>
+        <div class="popup-image-container">
+          <!-- Añade la imagen aquí -->
+          <img src="../img/payment.png" alt="Payment Method" class="popup-image" />
+        </div>
+        <div class="popup-carousel">
+          <!-- Agrega el carrusel de imágenes aquí -->
+          <!-- Puedes usar bibliotecas como "Slick Carousel" o "Swiper" para implementarlo -->
+        </div>
+        <button class="select-button">Select</button>
+      </div>
     </div>
-  </div>
-</div>
 
   </div>
 </template>
@@ -181,7 +182,7 @@ nav {
 }
 
 .card-button {
-  background-color: #4caf50;
+  background-color: #7fdebf;
   border-radius: 6px;
   color: #ffffff;
   display: inline-block;
@@ -193,7 +194,7 @@ nav {
 }
 
 .card-button:hover {
-  background-color: #45a049;
+  background-color: #74caad;
 }
 
 .sizeTittle {
@@ -238,6 +239,37 @@ nav {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 16px;
+}
+
+.popup-subtitle {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.popup-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.popup-image {
+  width: 200px; /* Ajusta el tamaño de la imagen según tus necesidades */
+}
+
+.popup-carousel {
+  /* Estilos del carrusel */
+}
+
+.select-button {
+  border: 1px solid black;
+  background-color: transparent;
+  border-radius: 6px;
+  color: black;
+  font-size: 18px;
+  padding: 9px 35px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .payment-methods {
