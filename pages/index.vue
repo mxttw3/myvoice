@@ -6,29 +6,9 @@
           <img src="../img/logo.png" alt="Logo" class="mx-auto max-w-xs" />
         </div>
 
-        <div class="flex justify-center mt-4">
-          <button
-            @click="loginWithGoogle"
-            class="w-full border border-red-700 hover:bg-red-700 hover:text-white text-red-500 font-bold py-2 px-4 rounded flex items-center justify-center"
-          >
-            <span class="flex items-center">
-              <img
-                src="../img/Google__G__Logo.svg.png"
-                alt="Google Logo"
-                class="w-5 h-5 mr-2"
-              />
-              <span class="text-center">Log In with Google</span>
-            </span>
-          </button>
-        </div>
+        <div id="firebaseui-auth-container"></div>
 
-        <div class="flex justify-center items-center mb-2 mt-4">
-          <hr class="flex-grow border-gray-300" />
-          <span class="mx-2 text-gray-500">Or continue with</span>
-          <hr class="flex-grow border-gray-300" />
-        </div>
-
-        <form @submit.prevent="login">
+        <form @submit.prevent="login" v-if="!currentUser">
           <div class="mb-4">
             <label for="email" class="block mb-2">Email:</label>
             <input
@@ -54,9 +34,20 @@
             Log In
           </button>
         </form>
-        <div class="flex justify-between mt-4">
+
+        <div class="flex justify-between mt-4" v-if="!currentUser">
           <a href="#" class="text-blue-500">Forgot password?</a>
           <a href="./createAcc" class="text-blue-500">Create an account</a>
+        </div>
+
+        <div class="mt-4" v-if="currentUser">
+          Logged in as: {{ currentUser.email }}
+          <button
+            @click="logout"
+            class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-4"
+          >
+            Log Out
+          </button>
         </div>
       </div>
     </div>
@@ -64,29 +55,82 @@
 </template>
 
 <script>
+import firebase from 'firebase/app';
+import 'firebase/auth';
+let firebaseui;
+if (process.browser) {
+  firebaseui = require('firebaseui');
+}
+
 export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      currentUser: null
+    };
+  },
+  mounted() {
+    if (process.browser) {
+      const firebaseUiConfig = {
+        callbacks: {
+          signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+            return false; // Prevent automatic redirect
+          },
+          uiShown: () => {
+            // Aquí puedes ocultar un loader si lo tienes
+          },
+        },
+        signInFlow: 'popup',
+        signInOptions: [
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+        // Your terms of service url.
+        tosUrl: 'https://example.com/terms',
+        // Your privacy policy url.
+        privacyPolicyUrl: 'https://example.com/privacy',
+      };
+
+      this.$fire.auth.onAuthStateChanged((user) => {
+        if (user) {
+          this.currentUser = user;
+          // Aquí puedes iniciar tus listeners de data o hacer cualquier otra acción
+        } else {
+          this.currentUser = null;
+          const ui = new firebaseui.auth.AuthUI(this.$fire.auth);
+          ui.start('#firebaseui-auth-container', firebaseUiConfig);
+        }
+      });
     }
   },
   methods: {
-    async loginWithGoogle() {
-      let provider = new this.$fireModule.auth.GoogleAuthProvider()
-      await this.$fire.auth.signInWithPopup(provider)
-    },
     async login() {
       try {
-        await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
-        await this.$router.push('/payment')
+        await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password);
+        const userDoc = await this.$fire.firestore.collection('stripe_customers').doc(currentUser.uid).get();
+        const stripeData = userDoc.data();
+        await this.$router.push({ path: '/payment', query: { name: currentUser.displayName, stripeData: JSON.stringify(stripeData) } });
       } catch (error) {
-        console.error('Error de inicio de sesión:', error)
+        console.error('Error de inicio de sesión:', error);
       }
-    }
-  }
-}
+    },
+    async logout() {
+      try {
+        await this.$fire.auth.signOut();
+        this.currentUser = null;
+      } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+      }
+    },
+    startDataListeners() {
+
+    },
+  },
+};
 </script>
+
 
 <style>
 .logo-container {
